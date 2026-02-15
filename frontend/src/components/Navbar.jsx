@@ -13,7 +13,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       await logout();
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -37,28 +37,42 @@ const Navbar = () => {
 
       {/* Navigation Links */}
       <div className="flex items-center gap-4">
-        {user?.name && (
-          <span className="text-gray-700 font-medium hidden sm:block">
-            Welcome, {user.name}
-          </span>
+        {user ? (
+          <>
+            <span className="text-gray-700 font-medium hidden sm:block">
+              Welcome, {user.name}
+            </span>
+            <button
+              onClick={() => navigate("/bookmark")}
+              className={linkStyle("/bookmark")}
+            >
+              <Plus size={18} />
+              Add
+            </button>
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-red-500 text-white hover:bg-red-600 transition"
+            >
+              <LogOut size={18} />
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              onClick={() => navigate("/login")}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl text-indigo-600 hover:bg-indigo-50 transition font-medium"
+            >
+              Login
+            </button>
+            <button
+              onClick={() => navigate("/register")}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 transition font-medium shadow-md hover:shadow-lg"
+            >
+              Get Started
+            </button>
+          </>
         )}
-
-
-        <button
-          onClick={() => navigate("/bookmark")}
-          className={linkStyle("/bookmark")}
-        >
-          <Plus size={18} />
-          Add
-        </button>
-
-        <button
-          onClick={handleLogout}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-red-500 text-white hover:bg-red-600 transition"
-        >
-          <LogOut size={18} />
-          Logout
-        </button>
       </div>
     </nav>
   );

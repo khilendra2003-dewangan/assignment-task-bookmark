@@ -37,6 +37,14 @@ const Register = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center p-6">
+      <div className="absolute top-6 left-6">
+        <button
+          onClick={() => navigate("/")}
+          className="flex items-center gap-2 text-white hover:text-indigo-100 transition font-medium"
+        >
+          ← Back to Home
+        </button>
+      </div>
       <div className="w-full max-w-md bg-white shadow-2xl rounded-3xl p-8">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
           Create Account
