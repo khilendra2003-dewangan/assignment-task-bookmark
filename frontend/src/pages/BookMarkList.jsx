@@ -99,7 +99,8 @@ const BookMarkList = () => {
         </div>
 
         {/* Table */}
-        <div className="overflow-x-auto">
+        {/* Responsive Layout */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full border-collapse">
             <thead>
               <tr className="bg-indigo-100 text-gray-700">
@@ -112,12 +113,12 @@ const BookMarkList = () => {
             <tbody className="text-gray-600">
               {bookmark.map((item) => (
                 <tr key={item._id} className="border-b hover:bg-gray-50 transition">
-                  <td className="p-3">
+                  <td className="p-3 max-w-xs truncate">
                     <a href={item.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                       {item.url}
                     </a>
                   </td>
-                  <td className="p-3">{item.title}</td>
+                  <td className="p-3 max-w-xs truncate">{item.title}</td>
                   <td className="p-3 flex justify-center gap-4">
                     <button
                       onClick={() => handleEdit(item._id)}
@@ -141,6 +142,37 @@ const BookMarkList = () => {
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* Mobile View (Cards) */}
+        <div className="md:hidden space-y-4">
+          {bookmark.map((item) => (
+            <div key={item._id} className="bg-indigo-50 p-4 rounded-xl border border-indigo-100 shadow-sm flex flex-col gap-2">
+              <div className="flex justify-between items-start">
+                <h3 className="font-bold text-gray-800 truncate pr-2">{item.title}</h3>
+                <div className="flex gap-3 shrink-0">
+                  <button
+                    onClick={() => handleEdit(item._id)}
+                    className="text-blue-600 hover:text-blue-800 transition p-1"
+                  >
+                    <Edit size={18} />
+                  </button>
+                  <button
+                    onClick={() => handleDelete(item._id)}
+                    className="text-red-600 hover:text-red-800 transition p-1"
+                  >
+                    <Trash2 size={18} />
+                  </button>
+                </div>
+              </div>
+              <a href={item.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 text-sm hover:underline truncate">
+                {item.url}
+              </a>
+            </div>
+          ))}
+          {bookmark.length === 0 && (
+            <p className="text-center text-gray-500 py-4">No bookmarks found. Add one!</p>
+          )}
         </div>
       </div>
     </div>

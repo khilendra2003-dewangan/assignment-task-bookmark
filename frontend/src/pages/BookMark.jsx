@@ -73,9 +73,9 @@ const BookMark = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600">
-      <div className="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 p-4">
+      <div className="bg-white shadow-2xl rounded-2xl p-6 md:p-8 w-full max-w-md">
+        <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-6">
           {isEditMode ? "Edit Bookmark" : "Add New Bookmark"}
         </h2>
 
