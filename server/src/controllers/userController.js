@@ -68,10 +68,11 @@ export const Login = async (req, res) => {
       expiresIn: "7d",
     });
 
+    const isProduction = process.env.NODE_ENV === "production";
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false, // true in production (HTTPS)
-      sameSite: "lax",
+      secure: isProduction, // true in production (HTTPS)
+      sameSite: isProduction ? "none" : "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -97,13 +98,14 @@ export const googleCallbackController = (req, res) => {
       expiresIn: "7d",
     });
 
+    const isProduction = process.env.NODE_ENV === "production";
     res.cookie("token", token, {
       httpOnly: true,
-      sameSite: "lax",
-      secure: false, // true in production (HTTPS)
+      sameSite: isProduction ? "none" : "lax",
+      secure: isProduction, // true in production (HTTPS)
     });
 
-    return res.redirect(`${process.env.FRONTEND_URL || "http://localhost:5173"}/bookmarklist`);
+    return res.redirect(`${(process.env.FRONTEND_URL || "http://localhost:5173").replace(/\/$/, "")}/bookmarklist`);
   } catch (error) {
     return res.status(500).json({
       success: false,
