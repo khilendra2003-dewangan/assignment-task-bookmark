@@ -8,7 +8,7 @@ import { useAuth } from "../context/AuthContext";
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
 
   const handleLogout = async () => {
     try {
@@ -37,6 +37,11 @@ const Navbar = () => {
 
       {/* Navigation Links */}
       <div className="flex items-center gap-4">
+        {user?.name && (
+          <span className="text-gray-700 font-medium hidden sm:block">
+            Welcome, {user.name}
+          </span>
+        )}
 
 
         <button
